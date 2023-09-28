@@ -13,7 +13,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       registeredDate: {
         type: Sequelize.DATE
@@ -27,8 +28,12 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+
+    await queryInterface.addIndex('Borrowers', ['id']);
   },
   async down(queryInterface, Sequelize) {
+    await queryInterface.removeIndex('Borrowers', ['id']);
+
     await queryInterface.dropTable('Borrowers');
   }
 };
