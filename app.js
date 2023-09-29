@@ -5,6 +5,8 @@ const bookRoutes = require('./routes/books');
 const borrowerRoutes = require('./routes/borrowers');
 const bookcheckoutRoutes = require('./routes/bookcheckout');
 const reportingRoutes = require('./routes/reporting');
+const userRoutes = require('./routes/user');
+
 const rateLimit = require('./middlewares/rateLimit');
 
 
@@ -16,6 +18,7 @@ app.use('/api/books', rateLimit, bookRoutes);
 app.use('/api/borrowers', rateLimit, borrowerRoutes);
 app.use('/api/checkout', bookcheckoutRoutes);
 app.use('/api/report', reportingRoutes);
+app.use('/api/user', userRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

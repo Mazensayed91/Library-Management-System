@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const verifyToken = require('../middlewares/verifyToken');
 const bookController = require('../controllers/books');
 const { createBookValidation, validate } = require('../middlewares/validation');
 
+// Apply the middleware to protect the routes
+router.use(verifyToken);
 
 router.post('/', createBookValidation, validate, bookController.createBook);
 router.get('/', bookController.getAllBooks);
