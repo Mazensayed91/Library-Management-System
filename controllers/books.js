@@ -1,4 +1,5 @@
 const { Book } = require('../models');
+const { paginateResults } = require('../utils/pagination');
 
 exports.createBook = async (req, res) => {
   try {
@@ -11,14 +12,34 @@ exports.createBook = async (req, res) => {
 };
 
 exports.getAllBooks = async (req, res) => {
-  try {
-    const books = await Book.findAll();
-    res.status(200).json(books);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error getting books' });
-  }
-};
+    let { page, limit } = req.query;
+    // Default values for page and limit
+    page = parseInt(page) || 1;
+    limit = parseInt(limit) || 10;
+  
+    if (page < 1 || limit < 1) {
+      return res.status(400).json({ error: 'Invalid page or limit values' });
+    }
+  
+    try {
+      const books = await Book.findAll();
+      const paginatedBooks = paginateResults(page, limit, books);
+  
+      res.status(200).json({
+        success: true,
+        data: paginatedBooks,
+        pagination: {
+          totalRecords: books.length,
+          currentPage: page,
+          perPage: limit,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error getting books' });
+    }
+  };
+  
 
 exports.getBookById = async (req, res) => {
   const { id } = req.params;

@@ -1,4 +1,5 @@
 const { Borrower } = require('../models');
+const { paginateResults } = require('../utils/pagination');
 
 exports.createBorrower = async (req, res) => {
   try {
@@ -11,14 +12,34 @@ exports.createBorrower = async (req, res) => {
 };
 
 exports.getAllBorrowers = async (req, res) => {
-  try {
-    const borrowers = await Borrower.findAll();
-    res.status(200).json(borrowers);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error getting borrowers' });
-  }
-};
+    let { page, limit } = req.query;
+    // Default values for page and limit
+    page = parseInt(page) || 1;
+    limit = parseInt(limit) || 10;
+  
+    if (page < 1 || limit < 1) {
+      return res.status(400).json({ error: 'Invalid page or limit values' });
+    }
+  
+    try {
+      const borrowers = await Borrower.findAll();
+      const paginatedBorrowers = paginateResults(page, limit, borrowers);
+  
+      res.status(200).json({
+        success: true,
+        data: paginatedBorrowers,
+        pagination: {
+          totalRecords: borrowers.length,
+          currentPage: page,
+          perPage: limit,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error getting borrowers' });
+    }
+  };
+  
 
 exports.getBorrowerById = async (req, res) => {
   const { id } = req.params;
