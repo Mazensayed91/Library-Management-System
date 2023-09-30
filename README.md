@@ -59,64 +59,54 @@ The server should now be running on http://localhost:3000.
 
 **Description:** Retrieve a list of all books.
 
-**Input:** None
+**Input:** 
+**Query Parameters:**
+- page (optional): Page number for pagination (default: 1).
+- limit (optional): Number of records per page (default: 10).
 
 **Output:**
 
-```list
-[
-    {
-        "id": 1,
-        "title": "Mazen's Book 2",
-        "author": "Mazon",
-        "isbn": "444-233242",
-        "quantity": 10,
-        "shelfLocation": "A1",
-        "createdAt": "2023-09-28T15:52:25.336Z",
-        "updatedAt": "2023-09-28T15:52:25.336Z"
-    },
-    {
-        "id": 2,
-        "title": "Mazen's Book 2",
-        "author": "Mazon",
-        "isbn": "444-233242",
-        "quantity": 10,
-        "shelfLocation": "A1",
-        "createdAt": "2023-09-28T15:52:25.944Z",
-        "updatedAt": "2023-09-28T15:52:25.944Z"
-    },
-    {
-        "id": 3,
-        "title": "Mazen's Book 2",
-        "author": "Mazon",
-        "isbn": "444-233242",
-        "quantity": 10,
-        "shelfLocation": "A1",
-        "createdAt": "2023-09-28T15:52:26.532Z",
-        "updatedAt": "2023-09-28T15:52:26.532Z"
-    },
-    {
-        "id": 4,
-        "title": "Mazen's Book 2",
-        "author": "Mazon",
-        "isbn": "444-233242",
-        "quantity": 10,
-        "shelfLocation": "A1",
-        "createdAt": "2023-09-29T11:59:23.375Z",
-        "updatedAt": "2023-09-29T11:59:23.375Z"
-    },
-    {
-        "id": 5,
-        "title": "Mazen's Book 2",
-        "author": "Mazon",
-        "isbn": "444-233242",
-        "quantity": 10,
-        "shelfLocation": "A1",
-        "createdAt": "2023-09-29T11:59:24.329Z",
-        "updatedAt": "2023-09-29T11:59:24.329Z"
+```json
+{
+    "success": true,
+    "data": [
+        {
+            "id": 1,
+            "title": "Mazen's Book 2",
+            "author": "Mazon",
+            "isbn": "444-233242",
+            "quantity": 10,
+            "shelfLocation": "A1",
+            "createdAt": "2023-09-29T11:59:25.172Z",
+            "updatedAt": "2023-09-29T11:59:25.172Z"
+        },
+        {
+            "id": 2,
+            "title": "Mazen's Book 2",
+            "author": "Mazon",
+            "isbn": "444-233242",
+            "quantity": 10,
+            "shelfLocation": "A1",
+            "createdAt": "2023-09-29T11:59:25.462Z",
+            "updatedAt": "2023-09-29T11:59:25.462Z"
+        },
+        {
+            "id": 3,
+            "title": "Mazen's Book 2",
+            "author": "Mazon",
+            "isbn": "444-233242",
+            "quantity": 10,
+            "shelfLocation": "A1",
+            "createdAt": "2023-09-29T12:15:22.786Z",
+            "updatedAt": "2023-09-29T12:15:22.786Z"
+        }
+    ],
+    "pagination": {
+        "totalRecords": 3,
+        "currentPage": 1,
+        "perPage": 3
     }
-]
-
+}
 ```
 ### GET /books/:id
 
@@ -179,35 +169,47 @@ The server should now be running on http://localhost:3000.
 #### Borrowers
 
 - **GET /borrowers**: Retrieve a list of all borrowers.
+**Input:** 
+**Query Parameters:**
+- page (optional): Page number for pagination (default: 1).
+- limit (optional): Number of records per page (default: 10).
   
 **Output:**
   ```json
-  [
-    {
-        "id": 1,
-        "name": "Mazen Sayed 2",
-        "email": "mazensayed@example.com",
-        "registeredDate": "2023-09-28T00:00:00.000Z",
-        "createdAt": "2023-09-29T11:59:41.480Z",
-        "updatedAt": "2023-09-29T11:59:41.480Z"
-    },
-    {
-        "id": 2,
-        "name": "Mazen Sayed 2",
-        "email": "mazensay3ed@example.com",
-        "registeredDate": "2023-09-28T00:00:00.000Z",
-        "createdAt": "2023-09-29T11:59:58.399Z",
-        "updatedAt": "2023-09-29T11:59:58.399Z"
-    },
-    {
-        "id": 3,
-        "name": "Mazen Sayed 2",
-        "email": "mazensay3hd@example.com",
-        "registeredDate": "2023-09-28T00:00:00.000Z",
-        "createdAt": "2023-09-29T12:22:50.173Z",
-        "updatedAt": "2023-09-29T12:22:50.173Z"
+   {
+    "success": true,
+    "data": [
+        {
+            "id": 1,
+            "name": "Mazen Sayed 2",
+            "email": "mazensayed@example.com",
+            "registeredDate": "2023-09-28T00:00:00.000Z",
+            "createdAt": "2023-09-29T11:59:41.480Z",
+            "updatedAt": "2023-09-29T11:59:41.480Z"
+        },
+        {
+            "id": 2,
+            "name": "Mazen Sayed 2",
+            "email": "mazensay3ed@example.com",
+            "registeredDate": "2023-09-28T00:00:00.000Z",
+            "createdAt": "2023-09-29T11:59:58.399Z",
+            "updatedAt": "2023-09-29T11:59:58.399Z"
+        },
+        {
+            "id": 3,
+            "name": "Mazen Sayed 2",
+            "email": "mazensay3hd@example.com",
+            "registeredDate": "2023-09-28T00:00:00.000Z",
+            "createdAt": "2023-09-29T12:22:50.173Z",
+            "updatedAt": "2023-09-29T12:22:50.173Z"
+        }
+    ],
+    "pagination": {
+        "totalRecords": 3,
+        "currentPage": 1,
+        "perPage": 3
     }
-]
+}
 ```
 - **GET /borrowers/:id**: Retrieve information about a specific borrower.
   
